@@ -1,0 +1,287 @@
+﻿<Window x:Class="PRO_Szkolenie_Techniczne_1.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PRO_Szkolenie_Techniczne_1"
+        mc:Ignorable="d"
+        Icon="D:\Visual Studio - Projekty\PRO_Szkolenie_Techniczne_1\PRO_Szkolenie_Techniczne_1\Assets\Ikona_v1_32px.ico"
+        Title="PRO Szkolenie Techniczne 1 | w67259" Height="600" Width="850" MinHeight="500" MinWidth="700">
+    <Grid Name="Grid_Główne_Okno">
+        <!-- Ustawienia Głównego Okna-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Menu -->
+        <StackPanel x:Name="Menu_Bar" Grid.Column="0" Grid.Row="0" Margin="0,0,0,0" >
+            <Menu Background="BlanchedAlmond">
+                <MenuItem Header="Ogólne">
+                    <MenuItem Header="O Programie" Click="MessageBox_O_Programie"/>
+                    <Separator/>
+                    <MenuItem Header="Zamknij" Click="Zamknij_Program"/>
+                </MenuItem>
+                
+                <MenuItem Header="Konto">
+                    <MenuItem Header="Zaloguj Się" Click="Zmiana_Widoku_Na_Logowanie"/>
+                    <MenuItem Header="Wyloguj Się" Click="Wylogowanie"/>
+                    <Separator/>
+                    <MenuItem Header="..." Name="MenuItem_Czy_Zalogowano" Visibility="Collapsed" IsEnabled="False"/>
+                </MenuItem>
+                
+                <MenuItem Visibility="Collapsed" Name="MenuBar_Admin" Header="Menu - Admin">
+                    <MenuItem Header="Wybór Testu" Click="Zmiana_Widoku_Na_Wybór_Testu"/>
+                    <MenuItem Header="Zarządzanie Kontem Administratora" Click="Zmiana_Widoku_Na_Edycję_Konta_Administratora"/>
+                    <MenuItem Header="Tworzenie Konta Nowego Administratora" Click="Zmiana_Widoku_Na_Tworzenie_Konta_Administratora"/>
+                    <MenuItem Header="Dodawanie Testu" Click="Zmiana_Widoku_Na_Tworzenie_Testu"/>
+                    <MenuItem Header="Zarządzanie Testami" Click="Zmiana_Widoku_Na_Zarządzanie_Testami"/>
+                    <MenuItem Header="Sprawdzanie Odpowiedzi" Click="Zmiana_Widoku_Na_Sprawdzanie_Odpowiedzi"/>
+                </MenuItem>
+            </Menu>
+        </StackPanel>
+
+        <!-- Poszczególne Widoki -->
+        <StackPanel Visibility="Collapsed" Grid.Column="0" Grid.Row="1" Margin="5,20,5,5" Name="Widok_Wybór_Testu">
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Wybierz jakiś test z poniższej listy</Label>
+            <WrapPanel>
+                <Label>Imię:</Label>
+                <TextBox x:Name="TextBox_Wybór_Testu_Imie" Width="150"/>
+                <Label>Nazwisko:</Label>
+                <TextBox x:Name="TextBox_Wybór_Testu_Nazwisko" Width="150"/>
+                <Label>E-Mail:</Label>
+                <TextBox x:Name="TextBox_Wybór_Testu_Email" Width="250"/>
+            </WrapPanel>
+            <DataGrid Name="DataGrid_Testy" AutoGenerateColumns="False" IsReadOnly="True" SelectionMode="Single" SelectionChanged="Wybór_Testu_Index" CanUserSortColumns="False" CanUserReorderColumns="False" VerticalScrollBarVisibility="Auto" MaxHeight="400">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="DataGrid_Testy_1" Header="ID"/>
+                    <DataGridTextColumn x:Name="DataGrid_Testy_2" Header="Nazwa"/>
+                    <DataGridTextColumn x:Name="DataGrid_Testy_3" Header="Opis"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <WrapPanel Margin="5,5,5,5">
+                <Button Click="Zmiana_Widoku_Na_Rozwiązywanie_Testu">Wybierz Zaznaczony Test</Button>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Visibility="Collapsed" Grid.Column="0" Grid.Row="1" Margin="5,20,5,5" Name="Widok_Logowanie">
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Zaloguj się jako administrator</Label>
+            <WrapPanel>
+                <Label Width="75">Login: </Label>
+                <TextBox x:Name="TextBox_Login" Width="150"></TextBox>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="75">Hasło: </Label>
+                <PasswordBox x:Name="PasswordBox_Hasło" Width="150"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Button Click="Logowanie">Zaloguj Się</Button>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Visibility="Collapsed" Grid.Column="0" Grid.Row="1" Margin="5,20,5,5" Name="Widok_Edycja_Konta_Administratora">
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Twoje konto administratora</Label>
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Czy chcesz zmienić swoje dane?</Label>
+            <WrapPanel>
+                <Label Width="75">ID: </Label>
+                <TextBox Name="Konto_Administratora_ID" Width="150" IsReadOnly="True" IsEnabled="False"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="75">Imię: </Label>
+                <TextBox x:Name="Konto_Administratora_Imię" Width="150"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="75">Nazwisko: </Label>
+                <TextBox x:Name="Konto_Administratora_Nazwisko" Width="150"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="75">Login: </Label>
+                <TextBox x:Name="Konto_Administratora_Login" Width="150"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="75">E-Mail: </Label>
+                <TextBox x:Name="Konto_Administratora_Email" Width="150"/>
+            </WrapPanel>
+            
+            <WrapPanel>
+                <Button Click="Edycja_Konta_Administratora_DB_Update_Dane">Zmień Swoje Dane</Button>
+            </WrapPanel>
+
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Czy chcesz utworzyć nowe konto administratora?</Label>
+            <WrapPanel>
+                <Button Click="Zmiana_Widoku_Na_Tworzenie_Konta_Administratora">Utwórz Nowe Konto</Button>
+                <Label>Wymagane są uprawnienia Super Administratora.</Label>
+            </WrapPanel>
+
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Chcesz zmienić swoje hasło?</Label>
+            <WrapPanel>
+                <Label Width="125">Obecne hasło: </Label>
+                <PasswordBox x:Name="Konto_Administratora_Stare_Hasło" Width="150"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="125">Nowe hasło:</Label>
+                <PasswordBox x:Name="Konto_Administratora_Nowe_Hasło" Width="150"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="125">Powtórz nowe hasło:</Label>
+                <PasswordBox x:Name="Konto_Administratora_Nowe_Hasło_Powtórzenie" Width="150"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Button Click="Edycja_Konta_Administratora_DB_Update_Hasło">Zmień swoje hasło</Button>
+            </WrapPanel>
+
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Zarzadanie Kontem</Label>
+            <Label>Chcesz się wylogować?</Label>
+            <WrapPanel>
+                <Button Click="Wylogowanie">Wyloguj</Button>
+            </WrapPanel>
+
+            <Label>Chcesz usunąć swoje konto?</Label>
+            <WrapPanel>
+                <Button Click="Edycja_Konta_Administratora_DB_Delete">Usuń konto</Button>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Visibility="Collapsed" Grid.Column="0" Grid.Row="1" Margin="5,20,5,5" Name="Widok_Tworzenie_Konta_Administratora">
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Utwórz nowe konto administratora</Label>
+            <WrapPanel>
+                <Label Width="75">Imię: </Label>
+                <TextBox x:Name="TextBox_Tworzenie_Konta_Administratora_Imie" Width="150"/>
+            </WrapPanel>
+
+            <WrapPanel>
+                <Label Width="75">Nazwisko:</Label>
+                <TextBox x:Name="TextBox_Tworzenie_Konta_Administratora_Nazwisko" Width="150"/>
+            </WrapPanel>
+
+            <WrapPanel>
+                <Label Width="75">Login:</Label>
+                <TextBox x:Name="TextBox_Tworzenie_Konta_Administratora_Login" Width="150"/>
+            </WrapPanel>
+
+            <WrapPanel>
+                <Label Width="75">E-Mail:</Label>
+                <TextBox x:Name="TextBox_Tworzenie_Konta_Administratora_Email" Width="150"/>
+            </WrapPanel>
+
+            <WrapPanel>
+                <Label Width="75">Hasło:</Label>
+                <PasswordBox x:Name="PasswordBox_Tworzenie_Konta_Administratora_Hasło" Width="150"/>
+            </WrapPanel>
+
+            <WrapPanel>
+                <Label Width="135">Super Administrator: </Label>
+                <RadioButton x:Name="RadioButton_Tworzenie_Konta_Administratora_SuperAdmin"/>
+            </WrapPanel>
+
+            <WrapPanel>
+                <Button Click="Tworzenie_Konta_Administratora_DB_Insert">Utwórz nowe konto administratora</Button>
+            </WrapPanel>
+        </StackPanel>
+        
+        <StackPanel Visibility="Collapsed" Grid.Column="0" Grid.Row="1" Margin="5,20,5,5" Name="Widok_Tworzenie_Testu">
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Utwórz nowy test</Label>
+            <WrapPanel>
+                <Label Width="75">Nazwa: </Label>
+                <TextBox x:Name="Tworzenie_Testu_Nazwa" Width="150"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Label Width="75">Opis: </Label>
+                <TextBox x:Name="Tworzenie_Testu_Opis" Width="150"/>
+            </WrapPanel>
+            <WrapPanel>
+                <Button Click="Tworzenie_Testu_DB_Insert">Utwórz Test</Button>
+            </WrapPanel>
+            <Label>Po utworzeniu testu, aby np. dodać do niego pytania, przejdź do menu edecyji pytań dla tego utworzonego testu.</Label>
+        </StackPanel>
+
+        <StackPanel Visibility="Collapsed" Grid.Column="0" Grid.Row="1" Margin="5,20,5,5" Name="Widok_Zarzadzanie_Testami">
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Zarządzanie testami</Label>
+            <DataGrid Name="DataGrid_Edytowanie_Testów" AutoGenerateColumns="False" SelectionMode="Single" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserDeleteRows="False" SelectionChanged="Zarządzanie_Testami_Index" SelectedCellsChanged="Zarządzanie_Testami_DB_Update" VerticalScrollBarVisibility="Auto" MaxHeight="400">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Testów_1" Header="ID" IsReadOnly="True"/>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Testów_2" Header="Nazwa"/>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Testów_3" Header="Opis"/>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Testów_4" Header="Autor" IsReadOnly="True"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <WrapPanel>
+                <Button Click="Zmiana_Widoku_Na_Tworzenie_Testu" Margin="5">Dodaj Nowy Tekst</Button>
+                <Button Click="Zarządzanie_Testami_DB_Delete" Margin="5">Usuń Zaznaczony Test</Button>
+                <Button Click="Zmiana_Widoku_Na_Edycję_Pytań" Margin="5">Edytuj Pytania</Button>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Visibility="Collapsed" Grid.Column="0" Grid.Row="1" Margin="5,20,5,5" Name="Widok_Edycja_Pytań">
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold" Name="Edytownaie_Pytań_ID_Testy">Edytowanie Pytań (ID Testu: ___)</Label>
+            <DataGrid Name="DataGrid_Edytowanie_Pytań" AutoGenerateColumns="False" SelectionMode="Single" CanUserSortColumns="False" CanUserReorderColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" SelectionChanged="Edycja_Pytań_Index" SelectedCellsChanged="Edycja_Pytań_DB_Update" VerticalScrollBarVisibility="Auto" MaxHeight="400">
+                <DataGrid.Columns>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Pytań_0" Header="ID" IsReadOnly="True"/>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Pytań_1" Header="Treść Pytania"/>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Pytań_2" Header="Poprawna Odpowiedź"/>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Pytań_3" Header="Odpowiedź A"/>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Pytań_4" Header="Odpowiedź B"/>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Pytań_5" Header="Odpowiedź C"/>
+                    <DataGridTextColumn x:Name="DataGrid_Edytowanie_Pytań_6" Header="Odpowiedź D"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <WrapPanel>
+                <Button Margin="5" Click="Edycja_Pytań_DB_Insert">Dodaj Pytanie</Button>
+                <Button Margin="5" Click="Edycja_Pytań_DB_Delete">Usuń Pytanie</Button>
+            </WrapPanel>
+        </StackPanel>
+        
+        <StackPanel Visibility="Collapsed" Grid.Column="0" Grid.Row="1" Margin="5,20,5,5" Name="Widok_Rozwiązywanie_Testu">
+            <WrapPanel>
+                <StackPanel>
+                    <Label Name="Wypełnianie_Testu_Treść_Pytania" Width="300">Treść pytania</Label>
+                </StackPanel>
+
+                <StackPanel>
+                    <Label FontWeight="Bold">Wybierz odpowiedź:</Label>
+                    <RadioButton x:Name="Wypełnianie_Testu_Odpowiedź_A" GroupName="Odppwiedzi">Odpowiedź A</RadioButton>
+                    <RadioButton x:Name="Wypełnianie_Testu_Odpowiedź_B" GroupName="Odppwiedzi">Odpowiedź B</RadioButton>
+                    <RadioButton x:Name="Wypełnianie_Testu_Odpowiedź_C" GroupName="Odppwiedzi">Odpowiedź C</RadioButton>
+                    <RadioButton x:Name="Wypełnianie_Testu_Odpowiedź_D" GroupName="Odppwiedzi">Odpowiedź D</RadioButton>
+
+                    <Button Click="Rozwiązywanie_Testu_DB_Insert" Margin="5">Zatwierdź</Button>
+                </StackPanel>
+            </WrapPanel>
+        </StackPanel>
+
+        <StackPanel Visibility="Collapsed" Grid.Column="0" Grid.Row="1" Margin="5,20,5,5" Name="Widok_Sprawdzanie_Odpowiedzi">
+            <Label HorizontalContentAlignment="Center" FontWeight="Bold">Sprawdzanie odpowiedzi</Label>
+
+            <WrapPanel>
+                <StackPanel Margin="5">
+                    <Label>Uczestnicy</Label>
+                    <DataGrid Name="DataGrid_Sprawdzanie_Odpowiedzi_Uczestnicy" AutoGenerateColumns="False" SelectionMode="Single" CanUserSortColumns="False" CanUserReorderColumns="False" IsReadOnly="True" SelectionChanged="Sprawdzanie_Opowiedzi_Index" VerticalScrollBarVisibility="Auto" MaxHeight="400">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_Uczestnicy_1" Header="ID"/>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_Uczestnicy_2" Header="Imię"/>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_Uczestnicy_3" Header="Nazwisko"/>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_Uczestnicy_4" Header="Data Utworzenia"/>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_Uczestnicy_5" Header="ID Testu"/>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_Uczestnicy_6" Header="Nazwa Testu"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+
+                <StackPanel Margin="5">
+                    <Label>Odpowiedzi wybranego uczestnika</Label>
+                    <DataGrid Name="DataGrid_Sprawdzanie_Odpowiedzi" AutoGenerateColumns="False" SelectionMode="Single" CanUserSortColumns="False" CanUserReorderColumns="False" IsReadOnly="True" VerticalScrollBarVisibility="Auto" MaxHeight="400">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_1" Header="ID"/>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_2" Header="Treść Pytania"/>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_3" Header="Poprawna Odpowiedź"/>
+                            <DataGridTextColumn x:Name="DataGrid_Sprawdzenie_Odpowiedzi_4" Header="Wybrana Odpowiedź"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </StackPanel>
+            </WrapPanel>
+        </StackPanel>
+
+    </Grid>
+
+</Window>
