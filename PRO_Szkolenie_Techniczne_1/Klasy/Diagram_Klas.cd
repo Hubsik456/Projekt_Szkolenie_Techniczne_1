@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="PRO_Szkolenie_Techniczne_1.Klasy.Konto">
+    <Position X="5.5" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAgAAAAAAAAAAAAAAAAAAEAAAQAAAgAAA=</HashCode>
+      <FileName>Klasy\Konto.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRO_Szkolenie_Techniczne_1.Klasy.Pytanie">
+    <Position X="7.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAEgAAAAAACIAAAAAAAAAAgCJAIAAAIEmA=</HashCode>
+      <FileName>Klasy\Pytanie.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRO_Szkolenie_Techniczne_1.Klasy.Test">
+    <Position X="12.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAAAAAAAAgAAABAAAAAQAAAAAAAAAAAAgAAAIIgA=</HashCode>
+      <FileName>Klasy\Test.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRO_Szkolenie_Techniczne_1.Klasy.Uczestnik">
+    <Position X="3.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AIAACAAAAIAAgACIAAAAAAAAAAAIAAAICAAACACAAgA=</HashCode>
+      <FileName>Klasy\Uczestnik.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PRO_Szkolenie_Techniczne_1.Klasy.Udzielona_Odpowiedź">
+    <Position X="10" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAKAAAAAgAAAAgCAAAAAAAAiA=</HashCode>
+      <FileName>Klasy\Udzielona_Odpowiedź.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
